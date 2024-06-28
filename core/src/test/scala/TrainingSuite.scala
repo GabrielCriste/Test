@@ -17,7 +17,7 @@
 package torch
 import torch.data.*
 
-class TraininSuite extends munit.FunSuite {
+class TrainingSuite extends munit.FunSuite {
   test("training") {
 
     val xTrain = torch.arange(end = 10, dtype = float32) // .reshape(10, 1)

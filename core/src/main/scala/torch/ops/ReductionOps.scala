@@ -916,6 +916,6 @@ private[torch] trait ReductionOps {
     val nativeDim = dim.toArray
     fromNative(
       if nativeDim.isEmpty then torchNative.count_nonzero(input.native)
-      else torchNative.count_nonzero(input.native, nativeDim: _*)
+      else torchNative.count_nonzero(input.native, nativeDim*)
     )
 }

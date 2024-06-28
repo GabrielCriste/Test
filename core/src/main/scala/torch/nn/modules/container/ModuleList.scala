@@ -77,7 +77,7 @@ final class ModuleList[D <: DType](override val modules: TensorModule[D]*)
     // TODO: not in Python code. Note other modules retain index, so we have repeats
     this.register(module)(using Name(index.toString()))
     // TODO: make modules list mutable?
-    ModuleList(all: _*)
+    ModuleList(all*)
 
   /** Appends a given module to the end of the list.
     *
@@ -94,7 +94,7 @@ final class ModuleList[D <: DType](override val modules: TensorModule[D]*)
     this.register(module)(using Name(index.toString()))
     val all = modules.appended(module)
     // TODO: make modules list mutable?
-    ModuleList(all: _*)
+    ModuleList(all*)
 
   /** Appends modules from a Python iterable to the end of the list.
     *
@@ -115,7 +115,7 @@ final class ModuleList[D <: DType](override val modules: TensorModule[D]*)
       this.register(module)(using Name(index.toString()))
     )
     // TODO: make modules list mutable?
-    ModuleList(all: _*)
+    ModuleList(all*)
 
   override def hasBias(): Boolean = modules.exists(_.hasBias())
 

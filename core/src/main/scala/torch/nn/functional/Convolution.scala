@@ -123,7 +123,7 @@ private[torch] trait Convolution {
         toArray(padding),
         toArray(outputPadding),
         groups,
-        toArray(dilation): _*
+        toArray(dilation)*
       )
     )
 
@@ -151,7 +151,7 @@ private[torch] trait Convolution {
         toArray(padding),
         toArray(outputPadding),
         groups,
-        toArray(dilation): _*
+        toArray(dilation)*
       )
     )
 
@@ -179,7 +179,7 @@ private[torch] trait Convolution {
         toArray(padding),
         toArray(outputPadding),
         groups,
-        toArray(dilation): _*
+        toArray(dilation)*
       )
     )
 

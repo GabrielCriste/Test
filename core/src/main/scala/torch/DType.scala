@@ -413,6 +413,7 @@ type DTypeOrDeriveArange[
   *   rules](https://github.com/pytorch/pytorch/blob/fb6749d977e33b5f463c2d0a1b56a939428105e5/c10/core/ScalarType.h#L423-L444)
   */
 type Promoted[T <: DType, U <: DType] <: DType = (T, U) match
+  case (T, DType)                                => T
   case (T, T)                                    => T
   case (U, U)                                    => U
   case (Undefined, U) | (T, Undefined)           => Undefined

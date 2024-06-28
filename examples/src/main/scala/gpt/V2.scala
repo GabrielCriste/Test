@@ -151,7 +151,7 @@ object V2:
    */
 
   // here are all the unique characters that occur in this text
-  val chars = SortedSet(text: _*)
+  val chars = SortedSet(text*)
   println(s"chars = ${chars.mkString(", ")}")
   val vocab_size = chars.size
   println(s"vocab_size = $vocab_size")
@@ -413,7 +413,7 @@ object V2:
       Utils.register_i(this, Head_2(nEmbed, headSize, blockSize), i)
     }
     // val hs = 0 until numHeads map{ i => Utils.register_i(this, Head(nEmbed, headSize, blockSize, dropout), i) }
-    val heads = register(nn.ModuleList(hs: _*))
+    val heads = register(nn.ModuleList(hs*))
     // TODO: BUG - self.proj = nn.Linear(head_size * num_heads, n_embd)
     val proj = register(nn.Linear(headSize * numHeads, nEmbed))
     // val proj = register( nn.Linear(nEmbed, nEmbed) )
@@ -603,7 +603,7 @@ object V2:
     val token_embedding_table = register(nn.Embedding(vocabSize, nEmbed))
     val position_embedding_table = register(nn.Embedding(blockSize, nEmbed))
     val blocks_i = 0 until nBlocks map { i => Block(nEmbed, nHead, blockSize, vocabSize, dropout) }
-    val blocks = register(nn.Sequential(blocks_i: _*))
+    val blocks = register(nn.Sequential(blocks_i*))
     val ln_f = register(nn.LayerNorm(Seq(nEmbed)))
     val lm_head = register(nn.Linear(nEmbed, vocabSize))
 

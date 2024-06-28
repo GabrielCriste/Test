@@ -92,7 +92,7 @@ final class LayerNorm[ParamType <: FloatNN | ComplexNN: Default](
 ) extends HasWeight[ParamType]
     with TensorModule[ParamType]:
 
-  private val shape: LongVector = LongVector(normalizedShape.map(_.toLong): _*)
+  private val shape: LongVector = LongVector(normalizedShape.map(_.toLong)*)
   private val options: LayerNormOptions = LayerNormOptions(shape)
   options.eps().put(eps)
   options.elementwise_affine().put(elementWiseAffine)

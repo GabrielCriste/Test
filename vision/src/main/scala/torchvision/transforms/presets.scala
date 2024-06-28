@@ -19,8 +19,7 @@ package transforms
 
 import com.sksamuel.scrimage.ImmutableImage
 import com.sksamuel.scrimage.ScaleMethod
-import torch.Tensor
-import torch.Float32
+import torch.{Float32, Tensor}
 import torchvision.transforms.functional.toTensor
 
 object Presets:

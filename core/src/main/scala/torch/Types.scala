@@ -56,4 +56,4 @@ type AtLeastOneFloatOrComplex[A <: DType, B <: DType] = A <:< (FloatNN | Complex
   B <:< (FloatNN | ComplexNN)
 
 /* Evidence that two dtypes are not the same */
-type NotEqual[D <: DType, D2 <: DType] = NotGiven[D =:= D2]
+infix type NotEqual[D <: DType, D2 <: DType] = NotGiven[D =:= D2]

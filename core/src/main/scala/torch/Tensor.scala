@@ -281,7 +281,7 @@ sealed abstract class Tensor[D <: DType]( /* private[torch]  */ val native: pyto
       case _                                        => false
 
   /** True if `other` has the same size and elements as this tensor, false otherwise. */
-  def equal(other: Tensor[D]): Boolean = native.equal(other.native)
+  infix def equal(other: Tensor[D]): Boolean = native.equal(other.native)
 
   /** Returns the tensor with elements exponentiated. */
   def exp: Tensor[D] = fromNative(native.exp())
@@ -415,7 +415,7 @@ sealed abstract class Tensor[D <: DType]( /* private[torch]  */ val native: pyto
 
   def <(other: ScalaType): Tensor[Bool] = lt(other)
 
-  def matmul[D2 <: DType](u: Tensor[D2]): Tensor[Promoted[D, D2]] =
+  infix def matmul[D2 <: DType](u: Tensor[D2]): Tensor[Promoted[D, D2]] =
     fromNative(native.matmul(u.native))
 
   def `@`[D2 <: DType](u: Tensor[D2]): Tensor[Promoted[D, D2]] = matmul(u)
