@@ -1,36 +1,32 @@
 FROM jupyter/base-notebook:python-3.7.6
 
+
 USER root
 
-# Instalar pacotes necessários para XFCE e TurboVNC
-RUN apt-get -y update && apt-get install -y \
-    dbus-x11 \
-    firefox \
-    xfce4 \
-    xfce4-panel \
-    xfce4-session \
-    xfce4-settings \
-    xorg \
-    xubuntu-icon-theme \
-    wget && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get -y update \
+ && apt-get install -y dbus-x11 \
+   firefox \
+   xfce4 \
+   xfce4-panel \
+   xfce4-session \
+   xfce4-settings \
+   xorg \
+   xubuntu-icon-theme
 
-# Instalar TurboVNC
+# Remove light-locker to prevent screen lock
 ARG TURBOVNC_VERSION=2.2.6
 RUN wget -q "https://sourceforge.net/projects/turbovnc/files/${TURBOVNC_VERSION}/turbovnc_${TURBOVNC_VERSION}_amd64.deb/download" -O turbovnc_${TURBOVNC_VERSION}_amd64.deb && \
-    apt-get install -y ./turbovnc_${TURBOVNC_VERSION}_amd64.deb && \
-    rm ./turbovnc_${TURBOVNC_VERSION}_amd64.deb && \
-    ln -s /opt/TurboVNC/bin/* /usr/local/bin/
+   apt-get install -y -q ./turbovnc_${TURBOVNC_VERSION}_amd64.deb && \
+   apt-get remove -y -q light-locker && \
+   rm ./turbovnc_${TURBOVNC_VERSION}_amd64.deb && \
+   ln -s /opt/TurboVNC/bin/* /usr/local/bin/
 
-# Ajustar permissões
+# apt-get may result in root-owned directories/files under $HOME
 RUN chown -R $NB_UID:$NB_GID $HOME
 
-# Adicionar arquivos de instalação
 ADD . /opt/install
 RUN fix-permissions /opt/install
 
 USER $NB_USER
-
-# Instalar dependências do Python
-COPY requirements.txt /opt/install/requirements.txt
+RUN cd /opt/install && \
 RUN pip install --no-cache-dir -r /opt/install/requirements.txt
