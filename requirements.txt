@@ -1,0 +1,19 @@
+# Dependências principais
+jupyter-server-proxy>=1.4
+websockify
+
+# Dependências adicionais para compatibilidade ou funcionalidades extras
+notebook
+numpy
+pandas
+matplotlib
+scipy
+scikit-learn
+seaborn
+
+# Dependências específicas para o ambiente gráfico
+PyVNC>=1.0
+pyvirtualdisplay
+
+# Dependências para garantir compatibilidade de pacotes Python
+setuptools>=40.8.0
