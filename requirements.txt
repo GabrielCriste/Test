@@ -1,4 +1,3 @@
-# Dependências principais para Jupyter e ambiente de servidor
 jupyter-server-proxy>=1.4
 notebook
 numpy
@@ -10,10 +9,5 @@ seaborn
 pyvirtualdisplay
 setuptools>=40.8.0
 websockify
-
-# Dependências adicionais
 tornado>=6.1
 requests>=2.25.1
-
-# Dependências para integração com o VNC e desktop
-pyvnc
