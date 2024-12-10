@@ -3,6 +3,9 @@ jupyter-server-proxy>=1.4
 websockify
 
 # Dependências adicionais
+jupyter-server-proxy>=1.4
+pip 
+websockify
 notebook
 numpy
 pandas
@@ -10,6 +13,9 @@ matplotlib
 scipy
 scikit-learn
 seaborn
+pyvirtualdisplay
+setuptools>=40.8.0
+
 
 # Dependências para interface gráfica (opcional)
 pyvirtualdisplay
