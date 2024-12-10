@@ -1,6 +1,8 @@
 # Dependências principais
 jupyter-server-proxy>=1.4
+pip
 websockify
+
 
 # Dependências adicionais
 jupyter-server-proxy>=1.4
