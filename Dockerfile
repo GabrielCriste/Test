@@ -1,45 +1,88 @@
-# Etapa 1: Usar uma imagem base com Ubuntu
+# Utilizando uma imagem base oficial do Ubuntu
 FROM ubuntu:22.04
 
-# Etapa 2: Atualizar pacotes e instalar dependências
-RUN apt-get update && apt-get install -y \
+# Evitar prompts interativos e configurar o ambiente para instalação
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Atualizando os pacotes e instalando dependências necessárias
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y \
     wget \
     curl \
-    vim \
-    python3-pip \
-    python3-dev \
-    python3-setuptools \
-    python3-venv \
-    libgtk2.0-0 \
-    libx11-dev \
-    libxtst6 \
-    libnss3 \
-    libxss1 \
-    libgconf-2-4 \
-    x11vnc \
-    xvfb \
-    xfce4 \
-    tightvncserver \
-    && apt-get clean
+    libplist3 \
+    hicolor-icon-theme \
+    xdg-user-dirs \
+    libexo-common \
+    libvisual-0.4-0 \
+    libyaml-0-2 \
+    libglib2.0-0 \
+    distro-info-data \
+    manpages \
+    libglvnd0 \
+    libwnck-3-common \
+    libsnmp-base \
+    libtdb1 \
+    libmaxminddb0 \
+    fonts-ubuntu \
+    tumbler-common \
+    libdbusmenu-glib4 \
+    libbrotli1 \
+    libsqlite3-0 \
+    libsasl2-modules \
+    libxfce4util-common \
+    libgdk-pixbuf2.0-common \
+    dosfstools \
+    binutils-common \
+    x11-common \
+    libsensors-config \
+    libnghttp2-14 \
+    libdeflate0 \
+    libwebrtc-audio-processing1 \
+    linux-libc-dev \
+    libctf-nobfd0 \
+    libnss-systemd \
+    xkb-data \
+    liblzo2-2 \
+    libnpth0 \
+    libntfs-3g89 \
+    libassuan0 \
+    libgomp1 \
+    perl-modules-5.34 \
+    bzip2 \
+    libldap-common \
+    libunwind8 \
+    libgphoto2-l10n \
+    libpthread-stubs0-dev \
+    apport-symptoms \
+    libjbig0 \
+    libcolord2 \
+    xxd \
+    ntfs-3g \
+    libopengl0 \
+    libfakeroot \
+    colord-data \
+    libasan6 \
+    libflac8 \
+    poppler-data \
+    libgarcon-common \
+    acl \
+    libsasl2-modules-db \
+    tzdata \
+    && rm -rf /var/lib/apt/lists/*
 
-# Etapa 3: Instalar pacotes do Python necessários
-RUN pip3 install --upgrade pip && \
-    pip3 install pyvirtualdisplay websocket-client webcolors uri-template tzdata \
-    types-python-dateutil traitlets threadpoolctl simpervisor Send2Trash rpds-py rfc3986-validator \
-    rfc3339-validator pyyaml python-json-logger propcache platformdirs pillow packaging overrides \
-    numpy kiwisolver jsonpointer joblib frozenlist fqdn fonttools cycler attrs async-timeout \
-    aiohappyeyeballs scipy referencing redis pandas multidict jupyter-server-terminals jupyter-core \
-    contourpy arrow aiosignal yarl scikit-learn matplotlib jwcrypto jupyter-client jsonschema-specifications \
-    isoduration websockify seaborn jsonschema aiohttp jupyter-events jupyter-server jupyter-server-proxy
+# Configure the timezone (replace "Europe/Lisbon" with your timezone)
+RUN echo "Europe/Lisbon" > /etc/timezone && \
+    dpkg-reconfigure -f noninteractive tzdata
 
-# Etapa 4: Criar script para iniciar o ambiente
-RUN echo '#!/bin/bash\nexport DISPLAY=:1\nvncserver :1 -geometry 1280x720 -depth 24\nstartxfce4 &\nexec jupyter notebook --NotebookApp.token="" --NotebookApp.allow_origin="*"' > /usr/local/bin/start.sh \
-    && chmod +x /usr/local/bin/start.sh
+# Adicionar seu código-fonte ou outros arquivos necessários para a imagem
+COPY . /app
 
-# Etapa 5: Expor as portas para VNC e Jupyter
-EXPOSE 8888  # Porta do Jupyter
-EXPOSE 5901  # Porta do VNC
+# Definir o diretório de trabalho
+WORKDIR /app
 
-# Etapa 6: Definir o comando de inicialização
-CMD ["/usr/local/bin/start.sh"]
+# Expor a porta desejada
+EXPOSE 8080
+
+# Comando para rodar o seu aplicativo
+CMD ["your-command-here"]
 
