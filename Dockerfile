@@ -1,4 +1,3 @@
-# Use a imagem base leve do Jupyter
 FROM jupyter/base-notebook:python-3.9
 
 USER root
@@ -38,6 +37,7 @@ exec jupyter notebook --NotebookApp.token="" --NotebookApp.allow_origin="*"' > /
 
 # Expor a porta para o Jupyter e o VNC
 EXPOSE 8888
+EXPOSE 5901
 
 # Comando inicial
 CMD ["/usr/local/bin/start.sh"]
