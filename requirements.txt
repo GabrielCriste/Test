@@ -1,6 +1,19 @@
+# Dependências principais para Jupyter e ambiente de servidor
+jupyter-server-proxy>=1.4
+notebook
+numpy
+pandas
+matplotlib
+scipy
+scikit-learn
+seaborn
+pyvirtualdisplay
+setuptools>=40.8.0
+websockify
 
- jupyter-server-proxy>=1.4
- pip
- websockify
-jupyter
-jupyter-desktop-server
+# Dependências adicionais
+tornado>=6.1
+requests>=2.25.1
+
+# Dependências para integração com o VNC e desktop
+pyvnc
